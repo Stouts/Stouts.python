@@ -5,5 +5,5 @@
         python_enabled: yes
         python_ppa: ppa:fkrull/deadsnakes
         python_version: ""
-        python_virtualenv: yes
-        python_ignore_errors: yes
+        python_virtualenv: no
+        python_pip_latest: no
