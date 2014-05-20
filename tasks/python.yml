@@ -4,12 +4,12 @@
   when: ansible_os_family == 'Debian'
 
 - name: Update pip
-  pip: name={{item}} state=latest
+  pip: name={{item}} state=latest executable={{python_pip_executable}}
   with_items:
       - pip
       - setuptools
   when: python_pip_latest
 
 - name: Update python packages
-  pip: name=virtualenv state=latest
+  pip: name=virtualenv state=latest executable={{python_pip_executable}}
   when: python_virtualenv
