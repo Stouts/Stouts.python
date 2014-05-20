@@ -8,8 +8,9 @@
   with_items:
       - pip
       - setuptools
-  ignore_errors: ignore_errors
+  ignore_errors: python_ignore_errors
 
 - name: Update python packages
   pip: name=virtualenv state=latest
   when: python_virtualenv
+  ignore_errors: python_ignore_errors
