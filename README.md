@@ -11,7 +11,11 @@ Ansible role which manage python (pip, virtualenv)
 python_enabled: yes                 # The role is enabled
 python_ppa: ppa:fkrull/deadsnakes   # Python PPA
 python_version: ""                  # Set version (2.6, 2.7)
-python_virtualenv: yes              # Insall virtualenv
+python_pip_executable: pip
+python_pip_latest:                  # Update python packages
+- pip
+- setuptools
+- virtualenv
 ```
 
 #### Usage

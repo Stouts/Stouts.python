@@ -1,5 +1,6 @@
 - hosts: all
   tasks:
-    - include: tasks/main.yml python_pip_executable=/usr/bin/pip
+    - include: tasks/main.yml
   vars_files:
     - defaults/main.yml
+    - .travis.yml
