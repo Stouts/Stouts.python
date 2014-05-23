@@ -5,6 +5,6 @@ python_ppa: ppa:fkrull/deadsnakes   # Python PPA
 python_version: ""                  # Set version (2.6, 2.7)
 python_pip_executable: pip
 python_pip_latest:                  # Update python packages
-- pip
 - setuptools
 - virtualenv
+- pip
