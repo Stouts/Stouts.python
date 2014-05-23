@@ -12,5 +12,5 @@ script:
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
 python_pip_latest:
-- pip
+- setuptools
 - virtualenv
