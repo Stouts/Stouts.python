@@ -1,9 +1,5 @@
 - hosts: all
   tasks:
-    - include: 'tasks/main.yml'
-  vars:
-        python_enabled: yes
-        python_ppa: ppa:fkrull/deadsnakes
-        python_version: ""
-        python_virtualenv: no
-        python_pip_latest: no
+    - include: tasks/main.yml python_pip_executable=/usr/bin/pip
+  vars_files:
+    - defaults/main.yml
