@@ -16,8 +16,6 @@ script:
   # First run
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
-  - ansible-playbook -i inventory test.yml --connection=local --sudo
-
   # Second run Idempotence test
   - >
     ansible-playbook -i inventory test.yml --connection=local --sudo
@@ -28,3 +26,6 @@ script:
   - command -v python || exit 1
   - command -v pip || exit 1
   - command -v virtualenv || exit 1
+
+python_pip_latest:
+- virtualenv

@@ -3,3 +3,4 @@
     - include: tasks/main.yml
   vars_files:
     - defaults/main.yml
+    - .travis.yml
