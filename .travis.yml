@@ -27,5 +27,8 @@ script:
   - command -v pip || exit 1
   - command -v virtualenv || exit 1
 
+  # Test with python3.4
+  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.4"
+
 python_pip_latest:
 - virtualenv
