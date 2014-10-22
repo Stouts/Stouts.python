@@ -1,7 +1,9 @@
 Stouts.python
 =============
 
-[![Build Status](https://travis-ci.org/Stouts/Stouts.python.png)](https://travis-ci.org/Stouts/Stouts.python)
+[![Build Status](http://img.shields.io/travis/Stouts/Stouts.python.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.python)
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.python-blue.svg?style=flat-square)](https://galaxy.python.com/list#/roles/910)
+[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.python.svg?style=flat-square)]()
 
 Ansible role which manage python (pip, virtualenv)
 
