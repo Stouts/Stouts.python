@@ -2,21 +2,18 @@ Stouts.python
 =============
 
 [![Build Status](http://img.shields.io/travis/Stouts/Stouts.python.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.python)
-[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.python-blue.svg?style=flat-square)](https://galaxy.python.com/list#/roles/910)
-[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.python.svg?style=flat-square)]()
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.python-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/910)
 
-Ansible role which manage python (pip, virtualenv)
+Ansible role which manage python's versions (pip, virtualenv)
 
 #### Variables
 
 ```yaml
 python_enabled: yes                 # The role is enabled
 python_ppa: ppa:fkrull/deadsnakes   # Python PPA
-python_version: 2.7                 # Set version (2.6, 2.7, 3.3, 3.4)
-python_pip_executable: pip{{python_version}}
-python_pip_latest:                  # Update python packages
-- setuptools
-- virtualenv
+python_versions: [2.7, 3.4]         # Set versions (2.6, 2.7, 3.3, 3.4) which will be installed
+
+python_install: []                  # Set packages to install
 ```
 
 #### Usage
@@ -33,7 +30,8 @@ Example:
     - Stouts.python
 
   vars:
-    python_version: 3.4
+    python_versions: [2.7, 3.3]
+    python_install: [django, gunicorn]
 ```
 
 #### License

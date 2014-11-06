@@ -7,10 +7,17 @@
   copy: src=get-pip.py dest=/usr/share/python/get-pip.py
 
 - name: Install pip - pt. 2
-  shell: python{{python_version}} /usr/share/python/get-pip.py
-    creates=/usr/local/bin/pip{{python_version}}
+  shell: python{{item}} /usr/share/python/get-pip.py creates=/usr/local/bin/pip{{item}}
+  with_items: python_versions
+  register: python_pip_installed
   sudo: yes
 
-- name: Update python packages
-  pip: name={{item}} state=latest executable={{python_pip_executable}}
-  with_items: python_pip_latest
+- name: Update tools
+  pip: name="setuptools virtualenv" state=latest executable=/usr/local/bin/pip{{item.item}}
+  when: item.changed
+  with_items: python_pip_installed.results
+
+- name: Install python packages
+  pip: name="{{python_install|join(' ')}}" executable=/usr/local/bin/pip{{item}}
+  when: python_install
+  with_items: python_versions
