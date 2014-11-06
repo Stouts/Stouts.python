@@ -7,7 +7,9 @@
   apt_repository: repo={{python_ppa}} update_cache=yes
 
 - name: Install python
-  apt: pkg={{item}} state=present
-  with_items:
-    - python{{python_version}}
-    - python{{python_version}}-dev
+  apt: pkg=python{{item}} state=present
+  with_items: python_versions
+
+- name: Install python-dev
+  apt: pkg=python{{item}}-dev state=present
+  with_items: python_versions
