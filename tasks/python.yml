@@ -17,7 +17,13 @@
   when: item.changed
   with_items: python_pip_installed.results
 
-- name: Install python packages
+- name: Install global python packages
   pip: name="{{python_install|join(' ')}}" executable=/usr/local/bin/pip{{item}}
   when: python_install
   with_items: python_versions
+
+- name: Setup virtualenvs
+  shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
+  args:
+    creates: "{{item.path}}"
+  with_items: python_virtualenvs
