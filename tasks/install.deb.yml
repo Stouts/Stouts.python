@@ -5,6 +5,7 @@
 
 - name: Add python apt repository
   apt_repository: repo={{python_ppa}} update_cache=yes
+  when: python_ppa
 
 - name: Install python
   apt: pkg=python{{item}} state=present
