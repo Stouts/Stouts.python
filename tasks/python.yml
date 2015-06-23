@@ -3,22 +3,27 @@
 - include: install.deb.yml
   when: ansible_os_family == 'Debian'
 
+- include: install.yum.yml
+  when: ansible_os_family == 'RedHat'
+
+- file: state=directory name=/usr/share/python
+
 - name: Install pip - pt. 1
   copy: src=get-pip.py dest=/usr/share/python/get-pip.py
 
 - name: Install pip - pt. 2
-  shell: python{{item}} /usr/share/python/get-pip.py creates=/usr/local/bin/pip{{item}}
+  shell: "{{python_bin}}/python{{item}} /usr/share/python/get-pip.py creates={{python_bin}}/pip{{item}}"
   with_items: python_versions
   register: python_pip_installed
   sudo: yes
 
 - name: Update tools
-  pip: name="setuptools virtualenv" state=latest executable=/usr/local/bin/pip{{item.item}}
+  pip: name="setuptools virtualenv" state=latest executable={{python_bin}}/pip{{item.item}}
   when: item.changed
   with_items: python_pip_installed.results
 
 - name: Install global python packages
-  pip: name="{{python_install|join(' ')}}" executable=/usr/local/bin/pip{{item}}
+  pip: name="{{python_install|join(' ')}}" executable={{python_bin}}/pip{{item}}
   when: python_install
   with_items: python_versions
 

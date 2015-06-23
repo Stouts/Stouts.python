@@ -9,6 +9,9 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - all
+  - name: RedHat
+    versions:
+    - all
   categories:
   - system
   - development
