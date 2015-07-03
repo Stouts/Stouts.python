@@ -15,10 +15,13 @@
   shell: "{{python_bin}}/python{{item}} /usr/share/python/get-pip.py creates={{python_bin}}/pip{{item}}"
   with_items: python_versions
   register: python_pip_installed
+  changed_when: false
   sudo: yes
 
 - name: Update tools
-  pip: name="setuptools virtualenv" state=latest executable={{python_bin}}/pip{{item.item}}
+  pip: name="setuptools virtualenv" state=latest executable=pip{{item.item}}
+  environment:
+    PATH: "/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin"
   when: item.changed
   with_items: python_pip_installed.results
 
