@@ -21,6 +21,12 @@ python_virtualenvs: []              # Create virtualenvs
                                     #     - path: /path/to/venv
                                     #     - path: /path/to/another/venv
                                     #       python: python3.4
+
+
+python_bin: /usr/bin/python
+python_pkg_bin: /usr/local/bin
+python_yum_disablerepo: no
+python_yum_enablerepo: no
 ```
 
 #### Usage
