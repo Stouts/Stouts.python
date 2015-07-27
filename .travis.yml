@@ -33,5 +33,5 @@ script:
   - command -v python3.4 || exit 1
   - command -v pip3.4 || exit 1
 
-python_pip_latest:
-- virtualenv
+
+python_install: [virtualenv]
