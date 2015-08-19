@@ -12,7 +12,7 @@
   copy: src=get-pip.py dest=/usr/share/python/get-pip.py
 
 - name: Install pip - pt. 2
-  shell: "{{python_bin}}/python{{item}} /usr/share/python/get-pip.py creates={{python_pkg_bin}}/pip{{item}}"
+  shell: "{{python_bin}}{{item}} /usr/share/python/get-pip.py creates={{python_pkg_bin}}/pip{{item}}"
   with_items: python_versions
   register: python_pip_installed
   changed_when: false
