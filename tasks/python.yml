@@ -30,6 +30,10 @@
   when: python_install
   with_items: python_versions
 
+- name: Install virtualenv
+  pip: name="virtualenv" executable={{python_pkg_bin}}/pip{{item}}
+  with_items: python_versions
+
 - name: Setup virtualenvs
   shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
   args:
