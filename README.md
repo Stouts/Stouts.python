@@ -49,6 +49,24 @@ Example:
     - path: /opt/myproject/env
 ```
 
+If you want the virtualenv directories to be owned by a specific user
+
+```yaml
+
+- hosts: all
+
+  roles:
+    - Stouts.python
+
+  vars:
+    python_versions: [2.7, 3.3]
+    python_install: [django, gunicorn]
+    python_virtualenvs:
+    - path: /opt/myproject/env
+    python_virtualenv_user: "deployment"
+```
+
+
 #### License
 
 Licensed under the MIT License. See the LICENSE file for details.

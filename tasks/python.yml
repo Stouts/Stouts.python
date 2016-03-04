@@ -39,3 +39,13 @@
   args:
     creates: "{{item.path}}"
   with_items: "{{ python_virtualenvs }}"
+  when: "python_virtualenv_user is not defined"
+
+- name: Setup virtualenvs for specific user
+  shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
+  args:
+    creates: "{{item.path}}"
+  with_items: "{{ python_virtualenvs }}"
+  become_user: "{{ python_virtualenv_user }}"
+  when: "python_virtualenv_user is defined"
+
