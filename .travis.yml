@@ -1,24 +1,42 @@
 ---
 language: python
-python: "2.7"
+python:
+  - 2.7
+#  - 3.3
+#  - 3.4
+#  - 3.5
+cache:
+  directories:
+    - $HOME/.cache/pip
+env:
+  - ANSIBLE_VERSION=2.1.0.0
+cache: bundler
+#sudo: false
+sudo: required
+dist: trusty
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
 install:
-  - pip install ansible>=1.6.0
+  # Install Ansible.
+  - sudo pip install ansible==$ANSIBLE_VERSION
 script:
+  - sudo ansible --version
+
   # Prepare tests
   - echo localhost > inventory
 
+  - sudo apt-get remove python2.7 python3.4
+
   # Check syntax
-  - ansible-playbook --syntax-check -i inventory test.yml
+  - sudo ansible-playbook --syntax-check -i inventory test.yml
 
   # First run
-  - ansible-playbook -i inventory test.yml --connection=local --sudo
+  - sudo ansible-playbook -i inventory test.yml --connection=local --sudo
 
   # Second run Idempotence test
   - >
-    ansible-playbook -i inventory test.yml --connection=local --sudo
+    sudo ansible-playbook -i inventory test.yml --connection=local --sudo
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
@@ -28,7 +46,7 @@ script:
   - command -v virtualenv || exit 1
 
   # Test with python3.4
-  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.4"
+  - sudo ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.4"
 
   - command -v python3.4 || exit 1
   - command -v pip3.4 || exit 1
