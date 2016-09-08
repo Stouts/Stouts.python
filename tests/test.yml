@@ -18,3 +18,10 @@
     - fail:
         msg: "Python Not Found, tests failed."
       when: python_path.stdout != "/usr/bin/python"
+
+#    - command -v python || exit 1
+#    - command -v pip || exit 1
+#    - command -v virtualenv || exit 1
+
+#    - command -v python3.4 || exit 1
+#    - command -v pip3.4 || exit 1

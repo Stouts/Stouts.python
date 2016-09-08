@@ -32,12 +32,11 @@
 
 - name: Install virtualenv
   pip: name="virtualenv" executable={{python_pkg_bin}}/pip{{item}}
-  when: python_install
+  when: not( (python_virtualenvs is undefined) or (python_virtualenvs is none) or (python_virtualenvs | trim == '') )
   with_items: "{{ python_versions }}"
 
 - name: Setup virtualenvs
   shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
   args:
     creates: "{{item.path}}"
-  when: python_install
   with_items: "{{ python_virtualenvs }}"
