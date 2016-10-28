@@ -4,6 +4,7 @@
 
 - name: Install python-pycurl
   apt: name=python-pycurl
+  become: true
 
 - name: Add python apt repository
   apt_repository: repo={{python_ppa}} update_cache=yes

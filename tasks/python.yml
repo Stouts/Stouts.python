@@ -30,6 +30,9 @@
   when: python_install
   with_items: "{{ python_versions }}"
 
+- name: Reload ansible_facts
+  setup:
+
 - name: Install virtualenv
   pip: name="virtualenv" executable={{python_pkg_bin}}/pip{{item}}
   when: not( (python_virtualenvs is undefined) or (python_virtualenvs is none) or (python_virtualenvs | trim == '') )
