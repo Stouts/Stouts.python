@@ -22,7 +22,7 @@
   pip: name="setuptools virtualenv" state=latest executable=pip{{item.item}}
   environment:
     PATH: "/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin"
-  when: item.changed
+#  when: item.changed
   with_items: "{{ python_pip_installed.results }}"
 
 - name: Install global python packages
