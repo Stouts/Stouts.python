@@ -44,3 +44,6 @@ script:
 
 
 python_install: [virtualenv]
+#python_bin: ~/virtualenv/python3.5/bin
+python_bin: /usr/bin/python
+python_pkg_bin: ~/virtualenv/python$TRAVIS_PYTHON_VERSION/bin
