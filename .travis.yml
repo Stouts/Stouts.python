@@ -48,5 +48,4 @@ script:
 python_install: [virtualenv]
 python_versions: [2.7] 
 python_bin: /usr/bin/python
-#python_pkg_bin: ~/virtualenv/python2.7.13/bin
 python_pkg_bin: /home/travis/virtualenv/python2.7.13/bin

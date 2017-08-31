@@ -22,16 +22,13 @@
   pip: name="setuptools virtualenv" state=latest executable=pip{{item.item}}
   environment:
     PATH: "/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin"
-#  when: item.changed
+  when: item.changed
   with_items: "{{ python_pip_installed.results }}"
 
 - name: Install global python packages
   pip: name="{{python_install|join(' ')}}" executable={{python_pkg_bin}}/pip{{item}}
   when: python_install
   with_items: "{{ python_versions }}"
-
-- name: Reload ansible_facts
-  setup:
 
 - name: Install virtualenv
   pip: name="virtualenv" executable={{python_pkg_bin}}/pip{{item}}
