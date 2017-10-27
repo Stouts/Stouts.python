@@ -2,7 +2,7 @@
 language: python
 python:
   - "2.7"
-#  - "3.5"
+#  - "3.4"
 env:
   - ANSIBLE_VERSION=2.3.1.0
 cache: bundler
@@ -38,11 +38,11 @@ script:
   - command -v pip2.7 || exit 1  
   - command -v virtualenv || exit 1
 
-  # Test with python3.5
-  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.5"
+  # Test with python3.4
+  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.4"
 
-  - command -v python3.5 || exit 1
-  - command -v pip3.5 || exit 1
+  - command -v python3.4 || exit 1
+  - command -v pip3.4 || exit 1
 
 
 python_install: [virtualenv]
