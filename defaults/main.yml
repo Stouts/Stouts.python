@@ -10,7 +10,7 @@ python_virtualenvs: []                              # Create virtualenvs
                                                     #     - path: /path/to/venv
                                                     #     - path: /path/to/another/venv
                                                     #       python: python3.4
-python_virtualenv_user : "{{ ansible_ssh_user }}"   # can be changed if Ansible 2.0
+python_virtualenv_user : "{{ ansible_ssh_user|default(lookup('env', 'USER')) }}"   # can be changed if Ansible 2.0
 
 python_bin: /usr/bin/python
 python_pkg_bin: /usr/local/bin
