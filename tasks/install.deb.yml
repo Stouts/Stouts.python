@@ -12,7 +12,7 @@
 - name: Install python
   apt: name=python{{item}} state=present
   with_items: "{{ python_versions }}"
-
+  
 - name: Install python-dev
   apt: name=python{{item}}-dev state=present
   with_items: "{{ python_versions }}"
