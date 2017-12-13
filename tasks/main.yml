@@ -1,5 +1,5 @@
 ---
 
-- include: python.yml
+- import_tasks: python.yml
   when: python_enabled
   tags: [python]

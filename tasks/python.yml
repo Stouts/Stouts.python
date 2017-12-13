@@ -1,9 +1,9 @@
 ---
 
-- include: install.deb.yml
+- import_tasks: install.deb.yml
   when: ansible_os_family == 'Debian'
 
-- include: install.yum.yml
+- import_tasks: install.yum.yml
   when: ansible_os_family == 'RedHat'
 
 - file: state=directory name=/usr/share/python
