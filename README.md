@@ -12,7 +12,7 @@ Ansible role which manage python's versions (pip, virtualenv)
 ---
 
 python_enabled: yes                 # The role is enabled
-python_ppa: ppa:fkrull/deadsnakes   # Python PPA
+python_ppa: ppa:deadsnakes/ppa      # Python PPA
 python_versions: [2.7, 3.4]         # Set versions (2.6, 2.7, 3.3, 3.4) which will be installed
 
 python_install: []                  # Set packages to install globally
