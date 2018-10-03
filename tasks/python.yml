@@ -36,17 +36,26 @@
   with_items: "{{ python_versions }}"
 
 - name: Setup virtualenvs
-  shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
-  args:
-    creates: "{{item.path}}"
+  pip:
+    virtualenv: {{item.path}}
+    virtualenv_python: {{item.python|default('python')}}
+    virtualenv_site_packages: false
   with_items: "{{ python_virtualenvs }}"
+  tags:
+    - venv
+  environment:
+    PATH: "{{ ansible_env.PATH }}:{{ ansible_user_dir }}/.local/bin"
   when: "python_virtualenv_user is not defined"
 
 - name: Setup virtualenvs for specific user
-  shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
-  args:
-    creates: "{{item.path}}"
+  pip:
+    virtualenv: {{item.path}}
+    virtualenv_python: {{item.python|default('python')}}
+    virtualenv_site_packages: false
   with_items: "{{ python_virtualenvs }}"
+  tags:
+    - venv
+  environment:
+    PATH: "{{ ansible_env.PATH }}:{{ ansible_user_dir }}/.local/bin"
   become_user: "{{item.user|default(python_virtualenv_user)}}"
   when: "python_virtualenv_user is defined"
-
