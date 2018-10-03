@@ -5,10 +5,22 @@ python:
 #  - "3.4"
 env:
   - ANSIBLE_VERSION=latest
-cache: bundler
+  
+services:
+  - docker
+
+cache:
+  bundler:
+  directories:
+    - $HOME/.cache/pip
+    
 # sudo: false
 sudo: required
 dist: trusty
+
+virtualenv:
+  system_site_packages: false
+
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
@@ -16,13 +28,18 @@ install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
+
+  - pip install molecule  
 script:
   # Prepare tests
   - echo localhost > inventory
 
   # Check syntax
   - ansible-playbook --syntax-check -i inventory test.yml
-
+  
+  # Molecule test
+  # - molecule test
+  
   # First run
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
@@ -48,4 +65,4 @@ script:
 python_install: [virtualenv]
 python_versions: [2.7] 
 python_bin: /usr/bin/python
-python_pkg_bin: /home/travis/virtualenv/python2.7.13/bin
+python_pkg_bin: /home/travis/virtualenv/python2.7.14/bin
