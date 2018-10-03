@@ -21,3 +21,4 @@
   apt: name=python{{item}}-distutils state=present
   when: item >= 3
   with_items: "{{ python_versions }}"
+  ignore_errors: true
