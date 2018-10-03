@@ -1,9 +1,16 @@
 ---
 
+#regex_replace fail when there is an int
+#- debug: msg="python_versions {{ item|map('regex_replace', '.','')|list }}"
+#  with_items: "{{python_versions}}"
+  
+- debug: msg="python_versions {{ item|replace('.','')|list }}"
+  with_items: "{{python_versions}}"  
+  
 - name: Install python
-  yum: name=python{{item | regex_replace('.')}} state=present enablerepo={{python_yum_enablerepo or None}} disablerepo={{python_yum_disablerepo or None}}
-  with_items: "{{ python_versions }}"
+  yum: name=python{{ item|replace('.','') }} state=present enablerepo={{python_yum_enablerepo or None}} disablerepo={{python_yum_disablerepo or None}}
+  with_items: "{{python_versions}}"
 
 - name: Install python-dev
-  yum: name=python{{item | regex_replace('.')}}-devel state=present enablerepo={{python_yum_enablerepo or None}} disablerepo={{python_yum_disablerepo or None}}
-  with_items: "{{ python_versions }}"
+  yum: name=python{{ item|replace('.','') }}-devel state=present enablerepo={{python_yum_enablerepo or None}} disablerepo={{python_yum_disablerepo or None}}
+  with_items: "{{python_versions}}"
