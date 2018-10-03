@@ -4,9 +4,9 @@ python:
   - "2.7"
 #  - "3.4"
 env:
-  - ANSIBLE_VERSION=2.3.1.0
+  - ANSIBLE_VERSION=latest
 cache: bundler
-#sudo: false
+# sudo: false
 sudo: required
 dist: trusty
 before_install:
@@ -14,7 +14,8 @@ before_install:
  - sudo apt-get install -qq python-apt python-pycurl
 install:
   # Install Ansible.
-  - sudo pip install ansible==$ANSIBLE_VERSION
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 script:
   # Prepare tests
   - echo localhost > inventory
@@ -39,7 +40,7 @@ script:
   - command -v virtualenv || exit 1
 
   # Test with python3.4
-  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.4"
+  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_versions=[3.4]"
 
   #- command -v python3.4 || exit 1
   #- command -v pip3.4 || exit 1
