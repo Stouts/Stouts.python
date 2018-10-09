@@ -37,8 +37,8 @@
 
 - name: Setup virtualenvs
   pip:
-    virtualenv: {{item.path}}
-    virtualenv_python: {{item.python|default('python')}}
+    virtualenv: "{{ item.path }}"
+    virtualenv_python: "{{ item.python|default('python') }}"
     virtualenv_site_packages: false
   with_items: "{{ python_virtualenvs }}"
   tags:
@@ -49,13 +49,13 @@
 
 - name: Setup virtualenvs for specific user
   pip:
-    virtualenv: {{item.path}}
-    virtualenv_python: {{item.python|default('python')}}
+    virtualenv: "{{ item.path }}"
+    virtualenv_python: "{{ item.python|default('python') }}"
     virtualenv_site_packages: false
   with_items: "{{ python_virtualenvs }}"
   tags:
     - venv
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ ansible_user_dir }}/.local/bin"
-  become_user: "{{item.user|default(python_virtualenv_user)}}"
+  become_user: "{{ item.user|default(python_virtualenv_user) }}"
   when: "python_virtualenv_user is defined"
