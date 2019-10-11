@@ -19,5 +19,5 @@
   
 - name: Install python-distutils
   apt: name=python{{item}}-distutils state=present
-  when: item >= 3
+  when: item >= 3 and ansible_distribution_major_version >= '18'
   with_items: "{{ python_versions }}"
