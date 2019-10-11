@@ -19,14 +19,21 @@
   become: yes
 
 - name: Update tools
-  pip: name="setuptools virtualenv" state=latest executable=pip{{item.item}}
+  pip: 
+    name: 
+      - setuptools
+      - virtualenv
+    state: latest
+    executable: "pip{{item.item}}"
   environment:
     PATH: "/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin"
   when: item.changed
   with_items: "{{ python_pip_installed.results }}"
 
 - name: Install global python packages
-  pip: name="{{python_install|join(' ')}}" executable={{python_pkg_bin}}/pip{{item}}
+  pip: 
+    name: "{{ python_install }}"
+    executable: "{{python_pkg_bin}}/pip{{item}}"
   when: python_install
   with_items: "{{ python_versions }}"
 
