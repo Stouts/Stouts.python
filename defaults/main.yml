@@ -16,3 +16,4 @@ python_bin: /usr/bin/python
 python_pkg_bin: /usr/local/bin
 python_yum_disablerepo: no
 python_yum_enablerepo: no
+python_pip_installed_enabled: yes                                 # Pip install is enabled

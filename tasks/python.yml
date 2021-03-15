@@ -10,12 +10,14 @@
 
 - name: Install pip - pt. 1
   copy: src=get-pip.py dest=/usr/share/python/get-pip.py
+  when: python_pip_installed_enabled
 
 - name: Install pip - pt. 2
   shell: "{{python_bin}}{{item|replace('u','')}} /usr/share/python/get-pip.py creates={{python_pkg_bin}}/pip{{item|replace('u','')}}"
   with_items: "{{ python_versions }}"
   register: python_pip_installed
   changed_when: false
+  when: python_pip_installed_enabled
   become: yes
 
 - name: Update tools
@@ -50,7 +52,7 @@
   shell: virtualenv {{item.path}} --python={{item.python|default('python')}}
   args:
     creates: "{{item.path}}"
-  with_items: "{{python_virtualenvs}}"    
+  with_items: "{{python_virtualenvs}}"
   tags:
     - venv
   environment:
