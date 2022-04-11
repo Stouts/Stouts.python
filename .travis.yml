@@ -1,27 +1,45 @@
 ---
 language: python
 python:
-  - "2.7"
-#  - "3.4"
+#  - "2.7"
+  - "3.6"
 env:
-  - ANSIBLE_VERSION=2.3.1.0
-cache: bundler
-#sudo: false
+  - ANSIBLE_VERSION=latest
+  
+services:
+  - docker
+
+cache:
+  bundler:
+  directories:
+    - $HOME/.cache/pip
+    
+# sudo: false
 sudo: required
 dist: trusty
+
+virtualenv:
+  system_site_packages: false
+
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
 install:
   # Install Ansible.
-  - sudo pip install ansible==$ANSIBLE_VERSION
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
+
+  - pip install molecule  
 script:
   # Prepare tests
   - echo localhost > inventory
 
   # Check syntax
   - ansible-playbook --syntax-check -i inventory test.yml
-
+  
+  # Molecule test
+  # - molecule test
+  
   # First run
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
@@ -34,17 +52,17 @@ script:
 
   - command -v python || exit 1
   - command -v pip || exit 1
-  - command -v python2.7 || exit 1
-  - command -v pip2.7 || exit 1  
+  - command -v python3.6 || exit 1
+  - command -v pip3.6 || exit 1  
   - command -v virtualenv || exit 1
 
   # Test with python3.4
-  - ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_version=3.4"
+  #- ansible-playbook -i inventory test.yml --connection=local --sudo  -e "python_versions=[3.4]"
 
   #- command -v python3.4 || exit 1
   #- command -v pip3.4 || exit 1
 
 python_install: [virtualenv]
-python_versions: [2.7] 
+python_versions: [3.6] 
 python_bin: /usr/bin/python
-python_pkg_bin: /home/travis/virtualenv/python2.7.13/bin
+#python_pkg_bin: /home/travis/virtualenv/python2.7.14/bin
