@@ -1,8 +1,8 @@
 ---
 language: python
 python:
-  - "2.7"
-#  - "3.4"
+#  - "2.7"
+  - "3.6"
 env:
   - ANSIBLE_VERSION=latest
   
@@ -52,8 +52,8 @@ script:
 
   - command -v python || exit 1
   - command -v pip || exit 1
-  - command -v python2.7 || exit 1
-  - command -v pip2.7 || exit 1  
+  - command -v python3.6 || exit 1
+  - command -v pip3.6 || exit 1  
   - command -v virtualenv || exit 1
 
   # Test with python3.4
@@ -63,6 +63,6 @@ script:
   #- command -v pip3.4 || exit 1
 
 python_install: [virtualenv]
-python_versions: [2.7] 
+python_versions: [3.6] 
 python_bin: /usr/bin/python
-python_pkg_bin: /home/travis/virtualenv/python2.7.14/bin
+#python_pkg_bin: /home/travis/virtualenv/python2.7.14/bin

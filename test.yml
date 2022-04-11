@@ -1,6 +1,10 @@
-- hosts: all
+- hosts: localhost
   tasks:
     - import_tasks: tasks/main.yml
   vars_files:
     - defaults/main.yml
     - .travis.yml
+  vars:
+    python_ppa: ""
+    python_versions: [3.6, 3.8]
+    python_pip_installed_enabled: false
